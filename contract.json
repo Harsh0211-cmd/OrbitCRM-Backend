@@ -1,0 +1,569 @@
+{
+  "metadata": {
+    "generator": "scripts/extract-contract.js (deterministic Acorn AST extractor)",
+    "sourceFile": "orbitcrm-frontend-main/orbitcrm-frontend-main/script.js",
+    "schemaCompliance": "OrbitCRM Contract V1"
+  },
+  "demoAccounts": [
+    {
+      "id": "admin.admin",
+      "password": "admin123",
+      "name": "Aarav Sharma",
+      "role": "Admin",
+      "department": "Admin",
+      "email": "admin@orbitcrm.test",
+      "phone": "9876543210"
+    },
+    {
+      "id": "sales.emp",
+      "password": "sales123",
+      "name": "Priya Nair",
+      "role": "Employee",
+      "department": "Sales",
+      "email": "priya@orbitcrm.test",
+      "phone": "9876543211"
+    },
+    {
+      "id": "developer.emp",
+      "password": "dev123",
+      "name": "Vikram Rao",
+      "role": "Employee",
+      "department": "Development",
+      "email": "vikram@orbitcrm.test",
+      "phone": "9876543212"
+    },
+    {
+      "id": "support.emp",
+      "password": "support123",
+      "name": "Ananya Das",
+      "role": "Employee",
+      "department": "IT Support",
+      "email": "ananya@orbitcrm.test",
+      "phone": "9876543213"
+    },
+    {
+      "id": "customer.user",
+      "password": "customer123",
+      "name": "Rahul Mehta",
+      "company": "Acme Technologies",
+      "role": "Customer",
+      "email": "rahul@acme.example",
+      "phone": "9876543214"
+    }
+  ],
+  "rolePortals": {
+    "Admin": "Admin Portal",
+    "Customer": "Customer Portal",
+    "Employee-Sales": "Sales Portal",
+    "Employee-Development": "Development Portal",
+    "Employee-IT Support": "IT Support Portal"
+  },
+  "roleSidebarModules": {
+    "Admin": [
+      "Dashboard",
+      "Customers",
+      "Leads",
+      "Pipeline",
+      "Projects",
+      "Tickets",
+      "Tasks",
+      "Employees",
+      "Departments",
+      "Reports",
+      "Notifications",
+      "Settings",
+      "Profile",
+      "Logout"
+    ],
+    "Customer": [
+      "Dashboard",
+      "Request Service",
+      "My Requests",
+      "My Projects",
+      "Support Tickets",
+      "Notifications",
+      "Profile",
+      "Logout"
+    ],
+    "Employee-Sales": [
+      "Dashboard",
+      "My Leads",
+      "Pipeline",
+      "Customers",
+      "My Tasks",
+      "Notes",
+      "Notifications",
+      "Profile",
+      "Logout"
+    ],
+    "Employee-Development": [
+      "Dashboard",
+      "My Projects",
+      "My Tasks",
+      "Issues",
+      "Customers",
+      "Notes",
+      "Notifications",
+      "Profile",
+      "Logout"
+    ],
+    "Employee-IT Support": [
+      "Dashboard",
+      "Tickets",
+      "Customers",
+      "My Tasks",
+      "Escalations",
+      "Notes",
+      "Notifications",
+      "Profile",
+      "Logout"
+    ]
+  },
+  "scopingPolicy": {
+    "rawASTSignature": "mine(items, key=\"assigned\")",
+    "logic": {
+      "Admin": "return items (unfiltered, full visibility)",
+      "Customer": "return items.filter(x => x.customerId === user.customerId || x.customer === user.company)",
+      "Employee": "return items.filter(x => x[key] === user.name || x.department === user.department)"
+    },
+    "knownQuirks": [
+      "Customer filter uses loose equality and checks both customerId and customer company name string.",
+      "Employee filter checks x[key] === user.name (string join) OR x.department === user.department.",
+      "Customers page in frontend was derived from mine(state.projects), leaving Sales and IT Support with empty customer lists."
+    ]
+  },
+  "statusBadgeColorRegex": {
+    "s-green": "Completed|Resolved|Closed|Won|Active|Approved",
+    "s-red": "High|Blocked|Lost",
+    "s-blue": "New|Planning|Contacted|Submitted|Testing",
+    "s-purple": "Development|Escalated|Quotation",
+    "s-amber": "default (amber)"
+  },
+  "pipelineStages": [
+    "New",
+    "Contacted",
+    "Qualified",
+    "Requirement Discussion",
+    "Quotation",
+    "Negotiation",
+    "Won",
+    "Lost"
+  ],
+  "enums": {
+    "leadStatus": [
+      "New",
+      "Contacted",
+      "Qualified",
+      "Requirement Discussion",
+      "Quotation",
+      "Negotiation",
+      "Won",
+      "Lost"
+    ],
+    "projectStatus": [
+      "Not Started",
+      "Planning",
+      "Development",
+      "Testing",
+      "Deployment",
+      "Completed",
+      "Blocked",
+      "Waiting for Customer"
+    ],
+    "ticketStatus": [
+      "New",
+      "Assigned",
+      "In Progress",
+      "Escalated",
+      "Resolved",
+      "Customer Confirmation",
+      "Closed"
+    ],
+    "taskStatus": [
+      "Pending",
+      "In Progress",
+      "Completed"
+    ],
+    "issueStatus": [
+      "New",
+      "In Review",
+      "Resolved",
+      "Closed"
+    ],
+    "requestStatus": [
+      "Submitted",
+      "Contacted",
+      "Qualified",
+      "Requirement Discussion",
+      "Quotation",
+      "Negotiation",
+      "Approved",
+      "Closed"
+    ],
+    "priority": [
+      "Low",
+      "Medium",
+      "High"
+    ],
+    "services": [
+      "Website Development",
+      "IT Support & Maintenance",
+      "Website & Application Development"
+    ],
+    "contactMethod": [
+      "Email",
+      "Phone"
+    ],
+    "departments": [
+      "Admin",
+      "Sales",
+      "Development",
+      "IT Support"
+    ],
+    "notificationPreferences": [
+      "All CRM updates",
+      "Important only"
+    ]
+  },
+  "userFacingMessages": {
+    "toasts": [
+      "An account with this email already exists.",
+      "For this demo, use one of the shown accounts.",
+      "Invalid Login ID or Password.",
+      "Issue reported",
+      "Note saved",
+      "Passwords do not match.",
+      "Profile updated successfully",
+      "Record created",
+      "Registration successful. You can now sign in.",
+      "Service request submitted successfully",
+      "Settings saved",
+      "Status updated"
+    ],
+    "notifications": {
+      "seed": [
+        "High-priority ticket T-102 needs attention.",
+        "Acme Business Website moved to Development."
+      ],
+      "dynamicTemplates": [
+        "${r.id} has been escalated to Development.",
+        "${r.id} has been resolved; awaiting customer confirmation.",
+        "New note added by ${user.name}.",
+        "Your service request has been received."
+      ]
+    }
+  },
+  "entities": {
+    "Customer": {
+      "idType": "integer",
+      "fieldOrder": [
+        "id",
+        "name",
+        "company",
+        "email",
+        "phone",
+        "status",
+        "date"
+      ],
+      "requiredKeys": [
+        "id",
+        "name",
+        "company",
+        "email",
+        "phone",
+        "status",
+        "date"
+      ],
+      "optionalKeys": [],
+      "tableDisplayKeys": [
+        "name",
+        "company",
+        "email",
+        "phone",
+        "status"
+      ],
+      "seedRecordCount": 2,
+      "sampleFixture": {
+        "id": 1,
+        "name": "Rahul Mehta",
+        "company": "Acme Technologies",
+        "email": "rahul@acme.example",
+        "phone": "9876543214",
+        "status": "Active",
+        "date": "12 Sep 2026"
+      }
+    },
+    "Lead": {
+      "idType": "string (L-101)",
+      "fieldOrder": [
+        "id",
+        "name",
+        "company",
+        "service",
+        "source",
+        "status",
+        "assigned",
+        "followup",
+        "customerId",
+        "notes"
+      ],
+      "requiredKeys": [
+        "id",
+        "name",
+        "company",
+        "service",
+        "source",
+        "status",
+        "assigned",
+        "followup",
+        "notes"
+      ],
+      "optionalKeys": [
+        "customerId"
+      ],
+      "tableDisplayKeys": [
+        "id",
+        "name",
+        "company",
+        "service",
+        "status",
+        "assigned",
+        "followup"
+      ],
+      "seedRecordCount": 3,
+      "sampleFixture": {
+        "id": "L-101",
+        "name": "Rahul Mehta",
+        "company": "Acme Technologies",
+        "service": "Website Development",
+        "source": "Website",
+        "status": "Requirement Discussion",
+        "assigned": "Priya Nair",
+        "followup": "30 Sep 2026",
+        "customerId": 1,
+        "notes": [
+          "Customer needs a business website and contact form."
+        ]
+      }
+    },
+    "Project": {
+      "idType": "string (P-101)",
+      "fieldOrder": [
+        "id",
+        "name",
+        "customer",
+        "customerId",
+        "service",
+        "assigned",
+        "status",
+        "priority",
+        "deadline",
+        "progress",
+        "updates"
+      ],
+      "requiredKeys": [
+        "id",
+        "name",
+        "customer",
+        "customerId",
+        "service",
+        "assigned",
+        "status",
+        "priority",
+        "deadline",
+        "progress",
+        "updates"
+      ],
+      "optionalKeys": [],
+      "tableDisplayKeys": [
+        "id",
+        "name",
+        "customer",
+        "service",
+        "status",
+        "priority",
+        "progress"
+      ],
+      "seedRecordCount": 2,
+      "sampleFixture": {
+        "id": "P-101",
+        "name": "Acme Business Website",
+        "customer": "Acme Technologies",
+        "customerId": 1,
+        "service": "Website Development",
+        "assigned": "Vikram Rao",
+        "status": "Development",
+        "priority": "High",
+        "deadline": "15 Oct 2026",
+        "progress": 60,
+        "updates": [
+          "Homepage and contact form are in development."
+        ]
+      }
+    },
+    "Ticket": {
+      "idType": "string (T-102)",
+      "fieldOrder": [
+        "id",
+        "customer",
+        "customerId",
+        "subject",
+        "priority",
+        "assigned",
+        "status",
+        "created",
+        "due",
+        "latest",
+        "notes"
+      ],
+      "requiredKeys": [
+        "id",
+        "customer",
+        "customerId",
+        "subject",
+        "priority",
+        "assigned",
+        "status",
+        "created",
+        "due",
+        "latest",
+        "notes"
+      ],
+      "optionalKeys": [],
+      "tableDisplayKeys": [
+        "id",
+        "customer",
+        "subject",
+        "priority",
+        "status",
+        "assigned",
+        "due"
+      ],
+      "seedRecordCount": 2,
+      "sampleFixture": {
+        "id": "T-102",
+        "customer": "Acme Technologies",
+        "customerId": 1,
+        "subject": "Contact form not working",
+        "priority": "High",
+        "assigned": "Ananya Das",
+        "status": "In Progress",
+        "created": "25 Sep 2026",
+        "due": "30 Sep 2026",
+        "latest": "Support is investigating the form validation.",
+        "notes": []
+      }
+    },
+    "Task": {
+      "idType": "integer",
+      "fieldOrder": [
+        "id",
+        "title",
+        "department",
+        "assigned",
+        "related",
+        "priority",
+        "due",
+        "status"
+      ],
+      "requiredKeys": [
+        "id",
+        "title",
+        "department",
+        "assigned",
+        "related",
+        "priority",
+        "due",
+        "status"
+      ],
+      "optionalKeys": [],
+      "tableDisplayKeys": [
+        "title",
+        "assigned",
+        "department",
+        "related",
+        "priority",
+        "due",
+        "status"
+      ],
+      "seedRecordCount": 3,
+      "sampleFixture": {
+        "id": 1,
+        "title": "Follow up on Acme requirements",
+        "department": "Sales",
+        "assigned": "Priya Nair",
+        "related": "L-101",
+        "priority": "High",
+        "due": "30 Sep 2026",
+        "status": "Pending"
+      }
+    },
+    "ServiceRequest": {
+      "idType": "string (R-101)",
+      "fieldOrder": [
+        "id",
+        "customerId",
+        "service",
+        "description",
+        "contact",
+        "date",
+        "status",
+        "assigned"
+      ],
+      "requiredKeys": [
+        "id",
+        "customerId",
+        "service",
+        "description",
+        "contact",
+        "date",
+        "status",
+        "assigned"
+      ],
+      "optionalKeys": [],
+      "tableDisplayKeys": [
+        "id",
+        "service",
+        "date",
+        "status",
+        "assigned"
+      ],
+      "seedRecordCount": 1,
+      "sampleFixture": {
+        "id": "R-101",
+        "customerId": 1,
+        "service": "Website & Application Development",
+        "description": "Business website with contact form",
+        "contact": "Email",
+        "date": "21 Sep 2026",
+        "status": "Requirement Discussion",
+        "assigned": "Priya Nair"
+      }
+    },
+    "Issue": {
+      "idType": "string (I-1)",
+      "fieldOrder": [
+        "id",
+        "title",
+        "related",
+        "priority",
+        "description",
+        "assigned",
+        "status"
+      ],
+      "requiredKeys": [
+        "id",
+        "title",
+        "related",
+        "priority",
+        "description",
+        "assigned",
+        "status"
+      ],
+      "optionalKeys": [],
+      "tableDisplayKeys": [],
+      "seedRecordCount": 0,
+      "sampleFixture": null
+    }
+  }
+}
